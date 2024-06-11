@@ -2,5 +2,5 @@
 
 public class NewItem
 {
-    
+    public int Id { get; set; }
 }

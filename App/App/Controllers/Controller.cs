@@ -19,6 +19,7 @@ public class Controller : ControllerBase
 
 
     [HttpGet]
+
     public async Task<IActionResult> GetCharacterInfo(int id)
     {
 
@@ -49,20 +50,26 @@ public class Controller : ControllerBase
 
 
     [HttpPost]
-    public async Task<IActionResult> AddNewItem(int charactedID , NewItem newItemDto)
+    public async Task<IActionResult> AddNewItem(int charactedID , int itemId)
     {
         var checkValid = await _service.DoesCharacterExists(charactedID);
 
-        if (!checkValid)
+        var doesItemExists = await _service.DoesAllItemsExists(itemId);
+
+        var checkWieghtClass = await _service.DoesCharacterMaxWeightIsValid(charactedID, itemId);
+        if (!checkValid || !doesItemExists)
         {
             return StatusCode(StatusCodes.Status404NotFound);
         }
+
+
+        var newItem = new Item()
+        {
+
+        };
+
         
-        
-      
-        
-        
-        return Ok();
+        return Created();
     }
 
 }

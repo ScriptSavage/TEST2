@@ -26,10 +26,10 @@ public class DbService : IDbService
         return x;
     }
 
-    public async Task<bool> DoesAllItemsExists(Item item)
+    public async Task<bool> DoesAllItemsExists(int itemId)
     {
 
-        var x = await _context.Items.AnyAsync(e => e.Id == item.Id);
+        var x = await _context.Items.AnyAsync(e => e.Id == itemId);
 
         return x;
     }
@@ -42,11 +42,21 @@ public class DbService : IDbService
         return x;
     }
 
-    public async Task<bool> DoesCharacterMaxWeightIsValid(int id)
+    public async Task<bool> DoesCharacterMaxWeightIsValid(int id , int backPackAmout)
     {
 
-       
+        var x = await _context.Backpacks.Where(e => e.CharacterId == id).
+            AnyAsync(e=>e.Amount < backPackAmout);
 
+        return x;
+
+
+    }
+
+    public Task AddNewItemToBack(int itemId, int Amout, int CharacterId)
+    {
+        
+        
         throw new NotImplementedException();
     }
 }
