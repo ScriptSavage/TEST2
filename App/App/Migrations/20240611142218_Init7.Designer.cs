@@ -4,6 +4,7 @@ using App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Migrations
 {
     [DbContext(typeof(KolosContext))]
-    partial class KolosContextModelSnapshot : ModelSnapshot
+    [Migration("20240611142218_Init7")]
+    partial class Init7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,20 +41,6 @@ namespace App.Migrations
                     b.HasIndex("ItemId");
 
                     b.ToTable("Backpacks");
-
-                    b.HasData(
-                        new
-                        {
-                            CharacterId = 1,
-                            ItemId = 1,
-                            Amount = 10
-                        },
-                        new
-                        {
-                            CharacterId = 2,
-                            ItemId = 2,
-                            Amount = 5
-                        });
                 });
 
             modelBuilder.Entity("App.Models.Character", b =>
@@ -81,24 +70,6 @@ namespace App.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Characters");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CurrentWeight = 85,
-                            FirstName = "Max",
-                            LastName = "Galeziowski",
-                            MaxWeight = 120
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CurrentWeight = 100,
-                            FirstName = "Krzys",
-                            LastName = "Zbys",
-                            MaxWeight = 110
-                        });
                 });
 
             modelBuilder.Entity("App.Models.CharacterTitle", b =>
