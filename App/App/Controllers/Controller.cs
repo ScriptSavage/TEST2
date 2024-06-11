@@ -1,4 +1,5 @@
 ﻿using App.DTOs;
+using App.Models;
 using App.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,14 @@ public class Controller : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacterInfo(int id)
     {
+
+        var checkValid = await _service.DoesCharacterExists(id);
+
+        if (!checkValid)
+        {
+            return StatusCode(StatusCodes.Status404NotFound);
+        }
+
         var x = await _service.GetEquipment(id);
 
         return Ok(x.Select(e => new ReturnItemsDTO()
@@ -40,8 +49,19 @@ public class Controller : ControllerBase
 
 
     [HttpPost]
-    public async Task<IActionResult> AddNewValue()
+    public async Task<IActionResult> AddNewItem(int charactedID , NewItem newItemDto)
     {
+        var checkValid = await _service.DoesCharacterExists(charactedID);
+
+        if (!checkValid)
+        {
+            return StatusCode(StatusCodes.Status404NotFound);
+        }
+        
+        
+      
+        
+        
         return Ok();
     }
 

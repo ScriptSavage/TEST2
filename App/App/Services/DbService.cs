@@ -25,4 +25,28 @@ public class DbService : IDbService
 
         return x;
     }
+
+    public async Task<bool> DoesAllItemsExists(Item item)
+    {
+
+        var x = await _context.Items.AnyAsync(e => e.Id == item.Id);
+
+        return x;
+    }
+
+    public async Task<bool> DoesCharacterExists(int id)
+    {
+        var x = await _context.Characters.AnyAsync(e => e.Id == id);
+
+
+        return x;
+    }
+
+    public async Task<bool> DoesCharacterMaxWeightIsValid(int id)
+    {
+
+       
+
+        throw new NotImplementedException();
+    }
 }
